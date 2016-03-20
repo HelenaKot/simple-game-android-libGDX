@@ -1,0 +1,160 @@
+
+pack.png
+size: 256,16
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dot
+  rotate: false
+  xy: 2, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+dothollow
+  rotate: false
+  xy: 12, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+random1
+  rotate: false
+  xy: 22, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+random2
+  rotate: false
+  xy: 32, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+random3
+  rotate: false
+  xy: 42, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+random4
+  rotate: false
+  xy: 52, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+random5
+  rotate: false
+  xy: 62, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+round1
+  rotate: false
+  xy: 72, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+round2
+  rotate: false
+  xy: 82, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+round3
+  rotate: false
+  xy: 92, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+round4
+  rotate: false
+  xy: 102, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+round5
+  rotate: false
+  xy: 112, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square1
+  rotate: false
+  xy: 122, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square2
+  rotate: false
+  xy: 132, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square3
+  rotate: false
+  xy: 142, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square4
+  rotate: false
+  xy: 152, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square5
+  rotate: false
+  xy: 162, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+triangle1
+  rotate: false
+  xy: 172, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+triangle2
+  rotate: false
+  xy: 182, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+triangle3
+  rotate: false
+  xy: 192, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+triangle4
+  rotate: false
+  xy: 202, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+triangle5
+  rotate: false
+  xy: 212, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
