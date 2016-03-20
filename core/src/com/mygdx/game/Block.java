@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class Block {
     static public TreeMap<Integer, Block> mapAtlas = MapAtlas.instance;
     private static float scale = 10;
-    private Sprite sprite;
+    private Sprite sprite; //TODO dispose this
 
     Block(TextureAtlas.AtlasRegion region, Color tint) {
         sprite = new Sprite(region);
