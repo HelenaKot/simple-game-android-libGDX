@@ -2,30 +2,25 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 
-import java.util.HashMap;
-
-public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
+public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener, InputProcessor {
     SpriteBatch batch;
     TextureAtlas textureAtlas;
     private BitmapFont font;
     private String message = "";
     private int w,h;
 
-    class TouchInfo {
-        public float touchX = 0;
-        public float touchY = 0;
-        public boolean touched = false;
-    }
-
-    private HashMap<Integer,TouchInfo> touches = new HashMap<Integer,TouchInfo>();
-
+    /** przy inputach wazne jest zwracanie true/false -
+     * true oznacza, ze inputy obsluzone i te tyou scale/fling moga nie przejsc */
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -35,10 +30,11 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
         font.setColor(Color.RED);
         w = Gdx.graphics.getWidth();
         h = Gdx.graphics.getHeight();
-        Gdx.input.setInputProcessor(this);
-        for(int i = 0; i < 5; i++){
-            touches.put(i, new TouchInfo());
-        }
+        InputMultiplexer im = new InputMultiplexer();
+        GestureDetector gd = new GestureDetector(this);
+        im.addProcessor(gd);
+        im.addProcessor(this);
+        Gdx.input.setInputProcessor(im);
     }
 
     @Override
@@ -47,19 +43,74 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         Block.getSpriteAt(0,100,100).draw(batch);
-        message = "";
-        for(int i = 0; i < 5; i++){
-            if(touches.get(i).touched)
-                message += "Finger:" + Integer.toString(i) + "touch at:" +
-                        Float.toString(touches.get(i).touchX) +
-                        "," +
-                        Float.toString(touches.get(i).touchY) +
-                        "\n";
-        }
         float x = w/2;
         float y = h/2;
         font.draw(batch, message, x, y);
         batch.end();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        textureAtlas.dispose();
+        font.dispose();
+    }
+
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        message = "Touch down!";
+        Gdx.app.log("INFO", message);
+        return true;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count, int button) {
+        message = "Tap performed, finger" + Integer.toString(button);
+        Gdx.app.log("INFO", message);
+        return false;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        message = "Long press performed";
+        Gdx.app.log("INFO", message);
+        return true;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
+        message = "Fling performed, velocity:" + Float.toString(velocityX) +
+                "," + Float.toString(velocityY);
+        Gdx.app.log("INFO", message);
+        return true;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+        message = "Pan performed, delta:" + Float.toString(deltaX) +
+                "," + Float.toString(deltaY);
+        Gdx.app.log("INFO", message);
+        return true;
+    }
+
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        message = "Zoom performed, initial Distance:" + Float.toString(initialDistance) +
+                " Distance: " + Float.toString(distance);
+        Gdx.app.log("INFO", message);
+        return true;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        message = "Pinch performed";
+        Gdx.app.log("INFO", message);
+        return true;
     }
 
     @Override
@@ -79,26 +130,22 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(pointer < 5){
-            touches.get(pointer).touchX = screenX;
-            touches.get(pointer).touchY = screenY;
-            touches.get(pointer).touched = true;
-        }
-        return true;
+        message = "Touch Down";
+        Gdx.app.log("INFO", message);
+        return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(pointer < 5){
-            touches.get(pointer).touchX = 0;
-            touches.get(pointer).touchY = 0;
-            touches.get(pointer).touched = false;
-        }
-        return true;
+        message = "Touch up";
+        Gdx.app.log("INFO", message);
+        return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        message = "Touch Dragged";
+        Gdx.app.log("INFO", message);
         return false;
     }
 
@@ -109,13 +156,8 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
     @Override
     public boolean scrolled(int amount) {
+        message = "Scrolled";
+        Gdx.app.log("INFO", message);
         return false;
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
-        textureAtlas.dispose();
-        font.dispose();
     }
 }
