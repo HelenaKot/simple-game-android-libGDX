@@ -13,16 +13,17 @@ public class MapAtlas extends TreeMap<Integer, Block> {
 
     static void createMapAlas(TextureAtlas textureAtlas) {
         // locked space
-        new Block(textureAtlas.findRegion("dot"), Color.WHITE);
+        instance.put(instance.size(), new Block(textureAtlas.findRegion("dot"), Color.WHITE));
         // placement area
-        new Block(textureAtlas.findRegion("dothollow"), Color.WHITE);
+        instance.put(instance.size(), new Block(textureAtlas.findRegion("dothollow"), Color.WHITE));
 
         Random random = new Random();
         for (int blockType = 0; blockType < blockTypeNames.length; blockType++) {
             Color randomColor = new Color(random.nextFloat(),random.nextFloat(),random.nextFloat(),1);
             for (int altType = 1; altType <= variability; altType++) {
-                new Block(textureAtlas.findRegion(blockTypeNames[blockType]+altType), randomColor);
+                instance.put(instance.size(), new Block(textureAtlas.findRegion(blockTypeNames[blockType]+altType), randomColor));
             }
         }
     }
+
 }
