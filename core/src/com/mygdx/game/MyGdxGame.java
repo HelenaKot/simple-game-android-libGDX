@@ -6,7 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
@@ -14,15 +18,26 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener, InputProcessor {
     SpriteBatch batch;
+    private Texture texture;
+    private Sprite sprite;
+
     TextureAtlas textureAtlas;
     private BitmapFont font;
     private String message = "";
     private int w,h;
+    OrthographicCamera camera;
 
     /** przy inputach wazne jest zwracanie true/false -
      * true oznacza, ze inputy obsluzone i te tyou scale/fling moga nie przejsc */
     @Override
     public void create() {
+        camera = new OrthographicCamera(1280, 720);
+        texture = new Texture(Gdx.files.internal("placeholder.jpg"));
+        texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        sprite = new Sprite(texture);
+        sprite.setOrigin(0,0);
+        sprite.setPosition(-sprite.getWidth()/2,-sprite.getHeight()/2);
+
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         MapAtlas.createMapAlas(textureAtlas);
@@ -41,17 +56,22 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
     public void render() {
         Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(camera.combined);
+
         batch.begin();
         Block.getSpriteAt(0,100,100).draw(batch);
         float x = w/2;
         float y = h/2;
         font.draw(batch, message, x, y);
+        sprite.draw(batch);
         batch.end();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
+        texture.dispose();
         textureAtlas.dispose();
         font.dispose();
     }
@@ -90,6 +110,8 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
         message = "Pan performed, delta:" + Float.toString(deltaX) +
                 "," + Float.toString(deltaY);
         Gdx.app.log("INFO", message);
+        camera.translate(deltaX,0);
+        camera.update();
         return true;
     }
 
