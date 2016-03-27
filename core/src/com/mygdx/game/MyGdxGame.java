@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         MapAtlas.createMapAlas(textureAtlas);
-        stage = new Stage(new ExtendViewport(128,64));
+        stage = new Stage(new ExtendViewport(64,128));
         Gdx.input.setInputProcessor(stage);
         Block sampleActor = MapAtlas.instance.get(10);
         sampleActor.setTouchable(Touchable.enabled);
