@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,10 +20,10 @@ public class MyGdxGame extends ApplicationAdapter {
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         MapAtlas.createMapAlas(textureAtlas);
         stage = new Stage(new ExtendViewport(64,128));
-        Gdx.input.setInputProcessor(stage);
-        Block sampleActor = MapAtlas.instance.get(10);
-        sampleActor.setTouchable(Touchable.enabled);
+        Block sampleActor = new Block(MapAtlas.instance.get(1), Color.FOREST);
+        sampleActor.setPosition(30,30);
         stage.addActor(sampleActor);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -41,5 +42,6 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         textureAtlas.dispose();
+        stage.dispose();
     }
 }
