@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 import java.util.Iterator;
 
@@ -30,8 +31,9 @@ public class Block extends Actor {
 
     @Override
     public void draw(Batch batch, float alpha){
-        batch.draw(sprite,actorX,actorY,this.getOriginX(),this.getOriginY(), this.getWidth(),
-                this.getHeight(),this.getScaleX(), this.getScaleY(),this.getRotation());
+        batch.setColor(sprite.getColor()); // todo separate colors from sprites
+        batch.draw(sprite, actorX, actorY, this.getOriginX(), this.getOriginY(), this.getWidth(),
+                this.getHeight(), this.getScaleX(), this.getScaleY(), this.getRotation());
     }
 
     @Override
@@ -40,4 +42,10 @@ public class Block extends Actor {
             iter.next().act(delta);
         }
     }
+
+    /* returns if component is HIT, default:
+    public Actor hit (float x, float y, boolean touchable) {
+        if (touchable && getTouchable() != Touchable.enabled) return null;
+        return x >= 0 && x < this.getWidth() && y >= 0 && y < this.getHeight() ? this : null;
+    } */
 }
