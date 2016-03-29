@@ -16,13 +16,6 @@ public class Block extends Actor {
         setBounds(getX(), getY(), GameMap.blockSize, GameMap.blockSize);
     }
 
-    /*
-    public void setBlockData(BlockData blockData, Color tint) {
-        this.blockData = blockData;
-        this.tint = tint;
-    }
-    */
-
     public void draw(Batch batch, float alpha) {
         batch.setColor(tint);
         batch.draw(blockData.atlasRegion, getX(), getY(), getOriginX(), getOriginY(), getWidth(),

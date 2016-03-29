@@ -6,13 +6,10 @@ import com.mygdx.game.RegionAtlas;
 import com.mygdx.game.RegionAtlas.BlockShape;
 
 public class BlockFactory {
-    private static Block emptyBlock;
+    private static BlockData emptyBlockData = RegionAtlas.instance.get(0);
 
     public static Block createBlock() {
-        if (emptyBlock != null)
-            return emptyBlock;
-        else
-            return createBlock(RegionAtlas.instance.get(0), Color.WHITE);
+        return createBlock(emptyBlockData, Color.WHITE);
     }
 
     public static Block createBlock(BlockData blockData, Color tint) {

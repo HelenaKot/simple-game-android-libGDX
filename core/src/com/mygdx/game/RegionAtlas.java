@@ -14,18 +14,23 @@ public class RegionAtlas {
     RegionAtlas(TextureAtlas atlasRegion) {
         instance = new TreeMap<Integer, BlockData>();
 
-        new BlockData(atlasRegion.findRegion(getName(BlockShape.LOCKED)), instance.size(), BlockShape.LOCKED);
-        new BlockData(atlasRegion.findRegion(getName(BlockShape.BUILDABLE)), instance.size(), BlockShape.BUILDABLE);
+        putToAtlas (new BlockData(atlasRegion.findRegion(getName(BlockShape.LOCKED)), instance.size(), BlockShape.LOCKED));
+        putToAtlas(new BlockData(atlasRegion.findRegion(getName(BlockShape.BUILDABLE)), instance.size(), BlockShape.BUILDABLE));
 
         for (BlockShape shape : BlockShape.values()) {
             if (shape == BlockShape.LOCKED || shape == BlockShape.BUILDABLE) continue;
             for (int altType = 1; altType <= variability; altType++) {
                 String regionName = getName(shape) + altType;
-                if (new BlockData(atlasRegion.findRegion(regionName), instance.size(), shape).atlasRegion == null)
+                if (putToAtlas(new BlockData(atlasRegion.findRegion(regionName), instance.size(), shape)).atlasRegion == null)
                     System.out.println(regionName + " is an Incorrect regionName");
             }
         }
         System.out.println("RegioAtlas - contains " + instance.size() + " blocks");
+    }
+
+    static private BlockData putToAtlas(BlockData blockData) {
+        instance.put(blockData.id, blockData);
+        return blockData;
     }
 
     private static String getName(BlockShape blockShape) {

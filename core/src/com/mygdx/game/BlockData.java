@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 import static com.mygdx.game.RegionAtlas.BlockShape;
-import static com.mygdx.game.RegionAtlas.instance;
 
 public class BlockData {
     public AtlasRegion atlasRegion;
@@ -14,10 +13,5 @@ public class BlockData {
         this.atlasRegion = atlasRegion;
         this.id = id;
         this.shape = shape;
-        putToAtlas();
-    }
-
-    private void putToAtlas() {
-        instance.put(id, this);
     }
 }
