@@ -2,32 +2,40 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MyGdxGame extends ApplicationAdapter {
-    TextureAtlas textureAtlas;
+    private TextureAtlas textureAtlas;
     private Stage stage;
 
     @Override
     public void create() {
         Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
-        MapAtlas.createMapAlas(textureAtlas);
-        stage = new Stage(new ExtendViewport(64,128));
-        Block sampleActor = new Block(MapAtlas.instance.get(1), Color.FOREST);
-        sampleActor.setPosition(30,30);
-        stage.addActor(sampleActor);
+        stage = new Stage(new ExtendViewport(64, 128));
+        new RegionAtlas(textureAtlas);
+
+        setUpMap();
+
         Gdx.input.setInputProcessor(stage);
     }
 
+    private void setUpMap() {
+        int blockSize = RegionAtlas.instance.get(10).atlasRegion.getRegionWidth();
+        GameMap gameMap = new GameMap(stage.getWidth(), stage.getHeight(), blockSize);
+
+        for (Block[] blockRow : gameMap.map) {
+            for (Block block : blockRow) {
+                stage.addActor(block);
+            }
+        }
+    }
+
     @Override
-    public void resize (int width, int height) {
+    public void resize(int width, int height) {
         // See below for what true means.
         stage.getViewport().update(width, height, true);
     }
