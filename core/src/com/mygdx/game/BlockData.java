@@ -6,9 +6,9 @@ import static com.mygdx.game.RegionAtlas.BlockShape;
 import static com.mygdx.game.RegionAtlas.instance;
 
 public class BlockData {
-    AtlasRegion atlasRegion;
-    BlockShape shape;
-    int id;
+    public AtlasRegion atlasRegion;
+    public BlockShape shape;
+    public int id;
 
     BlockData(AtlasRegion atlasRegion, int id, BlockShape shape) {
         this.atlasRegion = atlasRegion;

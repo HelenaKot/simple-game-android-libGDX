@@ -16,19 +16,23 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         stage = new Stage(new ExtendViewport(64, 128));
-        new RegionAtlas(textureAtlas);
 
-        setUpMap();
+        setUpGame();
 
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void setUpMap() {
+    private void setUpGame() {
+        new RegionAtlas(textureAtlas);
         int blockSize = RegionAtlas.instance.get(10).atlasRegion.getRegionWidth();
-        GameMap gameMap = new GameMap(stage.getWidth(), stage.getHeight(), blockSize);
 
-        for (Block[] blockRow : gameMap.map) {
-            for (Block block : blockRow) {
+        spawnBlocks(new GameMap(stage.getWidth(), stage.getHeight(), blockSize));
+
+    }
+
+    private void spawnBlocks(GameMap gameMap) {
+        for (com.mygdx.game.blocks.Block[] blockRow : gameMap.map) {
+            for (com.mygdx.game.blocks.Block block : blockRow) {
                 stage.addActor(block);
             }
         }

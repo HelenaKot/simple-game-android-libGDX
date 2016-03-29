@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import java.util.TreeMap;
 
 public class RegionAtlas {
-    static TreeMap<Integer, BlockData> instance;
+    public static TreeMap<Integer, BlockData> instance;
 
-    enum BlockShape {LOCKED, BUILDABLE, RANDOM, ROUND, SQUARE, TRIANGLE}
+    public enum BlockShape {LOCKED, BUILDABLE, RANDOM, ROUND, SQUARE, TRIANGLE}
 
     static int variability = 5;
 
