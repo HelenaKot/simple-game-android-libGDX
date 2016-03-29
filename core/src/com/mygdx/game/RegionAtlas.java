@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 public class RegionAtlas {
     public static TreeMap<Integer, BlockData> instance;
+    public static int blockSize;
 
     public enum BlockShape {LOCKED, BUILDABLE, RANDOM, ROUND, SQUARE, TRIANGLE}
 
@@ -25,6 +26,8 @@ public class RegionAtlas {
                     System.out.println(regionName + " is an Incorrect regionName");
             }
         }
+
+        blockSize = instance.get(10).atlasRegion.getRegionWidth();
         System.out.println("RegioAtlas - contains " + instance.size() + " blocks");
     }
 

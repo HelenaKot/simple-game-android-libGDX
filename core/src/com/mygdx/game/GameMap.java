@@ -1,36 +1,37 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.blocks.Block;
 import com.mygdx.game.blocks.BlockFactory;
 
 public class GameMap {
-    com.mygdx.game.blocks.Block[][] map;
-    static public int blockSize;
+    Block[][] map;
 
-    GameMap(float width, float height, int blockSize) {
-        GameMap.blockSize = blockSize;
+    GameMap(float width, float height) {
         if (map == null)
-            initEmptyMap((int) width / blockSize, (int) height / blockSize);
+            initEmptyMap((int) width / RegionAtlas.blockSize, (int) height / RegionAtlas.blockSize);
     }
 
     private void initEmptyMap(int width, int height) {
-        map = new com.mygdx.game.blocks.Block[width][height];
+        map = new Block[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                initBlock(x, y, BlockFactory.createBlock());
+                initBlock(BlockFactory.createEmptyBlock(x, y));
             }
         }
-        changeBlock(width/2, 0, BlockFactory.createBlock(RegionAtlas.instance.get(6), Color.CHARTREUSE));
     }
 
-    void changeBlock(int x, int y, Block block) {
-        map[x][y].remove();
-        initBlock(x,y,block);
+    BlockData getBlockData(int x, int y) {
+        return map[x][y].getBlockData();
     }
 
-    private void initBlock(int x, int y, Block block) {
-        map[x][y] = block;
-        map[x][y].setPosition(x * blockSize, y * blockSize);
+    void changeBlock(Block block) {
+        map[block.x][block.y].remove();
+        initBlock(block);
+    }
+
+    private void initBlock(Block block) {
+        map[block.x][block.y] = block;
+        map[block.x][block.y].setPosition(block.x * RegionAtlas.blockSize, block.y * RegionAtlas.blockSize);
+        MyGdxGame.addToStage(block);
     }
 }

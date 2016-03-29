@@ -6,17 +6,23 @@ import com.mygdx.game.RegionAtlas;
 import com.mygdx.game.RegionAtlas.BlockShape;
 
 public class BlockFactory {
-    private static BlockData emptyBlockData = RegionAtlas.instance.get(0);
+    private static BlockData
+            emptyBlockData = RegionAtlas.instance.get(0),
+            buildableEmptyBlockData = RegionAtlas.instance.get(1);
 
-    public static Block createBlock() {
-        return createBlock(emptyBlockData, Color.WHITE);
+    public static Block createEmptyBlock(int x, int y) {
+        return createBlock(x, y, emptyBlockData, Color.WHITE);
     }
 
-    public static Block createBlock(BlockData blockData, Color tint) {
-        if (blockData.shape == BlockShape.BUILDABLE || blockData.shape == BlockShape.LOCKED) {
-            return new EmptyBlock(blockData, tint);
+    public static Block createBuildableBlock(int x, int y) {
+        return createBlock(x, y, buildableEmptyBlockData, Color.WHITE);
+    }
+
+    public static Block createBlock(int x, int y, BlockData blockData, Color tint) {
+        if (blockData.shape == BlockShape.BUILDABLE) {
+            return new BuildableBlock(x, y, blockData, tint);
         } else
-            return new Block(blockData, tint);
+            return new Block(x, y, blockData, tint);
     }
 }
 

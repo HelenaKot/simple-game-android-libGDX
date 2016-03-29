@@ -4,16 +4,17 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.blocks.Block;
 
 public class MyGdxGame extends ApplicationAdapter {
     private TextureAtlas textureAtlas;
-    private Stage stage;
+    private static Stage stage;
 
     @Override
     public void create() {
-        Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         textureAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
         stage = new Stage(new ExtendViewport(64, 128));
 
@@ -24,18 +25,11 @@ public class MyGdxGame extends ApplicationAdapter {
 
     private void setUpGame() {
         new RegionAtlas(textureAtlas);
-        int blockSize = RegionAtlas.instance.get(10).atlasRegion.getRegionWidth();
-
-        spawnBlocks(new GameMap(stage.getWidth(), stage.getHeight(), blockSize));
-
+        MapManager mapManager = new MapManager(stage.getWidth(), stage.getHeight());
     }
 
-    private void spawnBlocks(GameMap gameMap) {
-        for (com.mygdx.game.blocks.Block[] blockRow : gameMap.map) {
-            for (com.mygdx.game.blocks.Block block : blockRow) {
-                stage.addActor(block);
-            }
-        }
+    public static void addToStage(Actor actor) {
+        stage.addActor(actor);
     }
 
     @Override
@@ -46,6 +40,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     @Override
     public void render() {
+        Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
