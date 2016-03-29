@@ -2,8 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
 
-import java.util.Random;
-
 public class GameMap {
     Block[][] map;
     static int blockSize;
@@ -16,13 +14,13 @@ public class GameMap {
 
     private void createNewMap(int width, int height) {
         map = new Block[width][height];
-        Random random = new Random();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                BlockData blockData = RegionAtlas.instance.get(random.nextInt(RegionAtlas.instance.size()));
-                map[i][j] = new Block(blockData, new Color(random.nextFloat(), random.nextFloat(), random.nextFloat(), 1));
+                BlockData emptyBlock = RegionAtlas.instance.get(0);
+                map[i][j] = new Block(emptyBlock, Color.WHITE);
                 map[i][j].setPosition(i * blockSize, j * blockSize);
             }
         }
+        map[width/2][0].setBlockData(RegionAtlas.instance.get(6), Color.CHARTREUSE);
     }
 }
