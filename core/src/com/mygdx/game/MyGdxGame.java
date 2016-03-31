@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.game.blocks.Block;
 
 public class MyGdxGame extends ApplicationAdapter {
     private TextureAtlas textureAtlas;
