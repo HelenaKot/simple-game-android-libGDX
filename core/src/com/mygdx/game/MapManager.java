@@ -1,8 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.blocks.Block;
-import com.mygdx.game.blocks.BlockFactory;
+import com.mygdx.game.blocks.*;
+
+import static com.mygdx.game.blocks.BlockShape.*;
 
 public class MapManager {
     public static MapManager instance;
@@ -17,18 +18,20 @@ public class MapManager {
     public void placeBlock(Block block) {
         if (inRange(block.x, block.y)) {
             gameMap.changeBlock(block);
-            blockPlacedUpdateBuildingGrid(block.x, block.y);
+            blockPlacedUpdateBuildingGrid(block);
         }
     }
 
-    private void blockPlacedUpdateBuildingGrid(int x, int y) {
-        if (inRange(x - 1, y))
+    private void blockPlacedUpdateBuildingGrid(Block block) {
+        int x = block.x;
+        int y = block.y;
+        if (inRange(x - 1, y) && block.getBlockData().shape.canBuildLeft())
             markAsBuldable(x - 1, y);
-        if (inRange(x + 1, y))
+        if (inRange(x + 1, y) && block.getBlockData().shape.canBuildRight())
             markAsBuldable(x + 1, y);
-        if (inRange(x, y - 1))
+        if (inRange(x, y - 1) && block.getBlockData().shape.canBuildDown())
             markAsBuldable(x, y - 1);
-        if (inRange(x, y + 1))
+        if (inRange(x, y + 1) && block.getBlockData().shape.canBuildUp())
             markAsBuldable(x, y + 1);
     }
 
@@ -40,7 +43,7 @@ public class MapManager {
     }
 
     private void markAsBuldable(int x, int y) {
-        if (gameMap.getBlockData(x, y).shape == RegionAtlas.BlockShape.LOCKED)
+        if (gameMap.getBlockData(x, y).shape == LOCKED)
             gameMap.changeBlock(BlockFactory.createBuildableBlock(x, y));
     }
 }

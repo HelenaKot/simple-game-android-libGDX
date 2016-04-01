@@ -3,7 +3,6 @@ package com.mygdx.game.blocks;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.BlockData;
 import com.mygdx.game.RegionAtlas;
-import com.mygdx.game.RegionAtlas.BlockShape;
 
 public class BlockFactory {
     private static BlockData
