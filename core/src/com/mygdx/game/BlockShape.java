@@ -1,4 +1,4 @@
-package com.mygdx.game.blocks;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 

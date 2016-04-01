@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import java.util.TreeMap;
 
-import static com.mygdx.game.blocks.BlockShape.*;
+import static com.mygdx.game.BlockShape.BUILDABLE;
+import static com.mygdx.game.BlockShape.LOCKED;
+import static com.mygdx.game.BlockShape.values;
 
 public class RegionAtlas {
     public static TreeMap<Integer, BlockData> instance;
@@ -17,7 +19,7 @@ public class RegionAtlas {
         putToAtlas(new BlockData(atlasRegion.findRegion(LOCKED.getName()), instance.size(), LOCKED));
         putToAtlas(new BlockData(atlasRegion.findRegion(BUILDABLE.getName()), instance.size(), BUILDABLE));
 
-        for (com.mygdx.game.blocks.BlockShape shape : values) {
+        for (BlockShape shape : values) {
             if (shape == LOCKED || shape == BUILDABLE) continue;
             for (int altType = 1; altType <= variability; altType++) {
                 String regionName = shape.getName() + altType;
@@ -29,6 +31,11 @@ public class RegionAtlas {
         blockSize = instance.get(10).atlasRegion.getRegionWidth();
         System.out.println("RegioAtlas - contains " + instance.size() + " blocks");
     }
+
+    /* todo not sure if needed
+    static public BlockData get(BlockShape shape, int var) {
+        return instance.get((BlockShape.values.indexOf(shape) - 2) * variability + var);
+    } */
 
     static private BlockData putToAtlas(BlockData blockData) {
         instance.put(blockData.id, blockData);

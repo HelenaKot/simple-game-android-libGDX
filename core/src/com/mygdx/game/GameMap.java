@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
-import com.mygdx.game.blocks.Block;
-import com.mygdx.game.blocks.BlockFactory;
+import com.mygdx.game.actors.Block;
+import com.mygdx.game.actors.BlockFactory;
 
 public class GameMap {
     Block[][] map;

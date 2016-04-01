@@ -1,4 +1,4 @@
-package com.mygdx.game.blocks;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;

@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.mygdx.game.blocks.BlockShape;
 
 public class BlockData {
     public AtlasRegion atlasRegion;
