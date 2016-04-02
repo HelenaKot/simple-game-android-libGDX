@@ -26,19 +26,12 @@ public class BlockShape {
         return name;
     }
 
-    public boolean canBuildUp() {
-        return canBuild[0];
+    public boolean canBuild(Direction direction) {
+        return canBuild[direction.ordinal()];
     }
 
-    public boolean canBuildRight() {
-        return canBuild[1];
-    }
-
-    public boolean canBuildDown() {
-        return canBuild[2];
-    }
-
-    public boolean canBuildLeft() {
-        return canBuild[3];
+    public boolean canConnect(BlockShape shape, Direction direction) {
+        System.out.println("connecting " + direction + "with " + direction.flip());
+        return this.canBuild(direction.flip()) && shape.canBuild(direction);
     }
 }

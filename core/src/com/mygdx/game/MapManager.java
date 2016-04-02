@@ -38,7 +38,7 @@ public class MapManager {
 
     private Block CreateFittingBlock(int x, int y) {
         BlockData blockData = RegionAtlas.instance.get(2 + random.nextInt(RegionAtlas.instance.size() - 3));
-        while (!blockFits(x,y, blockData.shape)) {
+        while (!blockFits(x, y, blockData.shape)) {
             blockData = RegionAtlas.instance.get(2 + random.nextInt(RegionAtlas.instance.size() - 3));
         }
         return BlockFactory.createBlock(x, y, blockData, specificColor);
@@ -46,29 +46,24 @@ public class MapManager {
     }
 
     private boolean blockFits(int x, int y, BlockShape shape) {
-        System.out.println("considered shape is "+shape.name);
-        if (inRange(x - 1, y) && shape.canBuildLeft() && gameMap.map[x-1][y].getBlockData().id > 2)
-            return true;
-        if (inRange(x + 1, y) && shape.canBuildRight() && gameMap.map[x+1][y].getBlockData().id > 2)
-            return true;
-        if (inRange(x, y + 1) && shape.canBuildUp() && gameMap.map[x][y+1].getBlockData().id > 2)
-            return true;
-        if (inRange(x, y-1) && shape.canBuildDown() && gameMap.map[x][y-1].getBlockData().id > 2)
-            return true;
+        System.out.println("considered shape is " + shape.name);
+        for (Direction direction : Direction.values()) {
+            if (inRange(x + direction.deltaX, y + direction.deltaY)
+                    && gameMap.map[x + direction.deltaX][y + direction.deltaY].getBlockData().shape.canConnect(shape, direction)) {
+                return true;
+            }
+        }
         return false;
     }
 
     private void blockPlacedUpdateBuildingGrid(Block block) {
-        int x = block.x;
-        int y = block.y;
-        if (inRange(x - 1, y) && block.getBlockData().shape.canBuildLeft())
-            markAsBuldable(x - 1, y);
-        if (inRange(x + 1, y) && block.getBlockData().shape.canBuildRight())
-            markAsBuldable(x + 1, y);
-        if (inRange(x, y - 1) && block.getBlockData().shape.canBuildDown())
-            markAsBuldable(x, y - 1);
-        if (inRange(x, y + 1) && block.getBlockData().shape.canBuildUp())
-            markAsBuldable(x, y + 1);
+        int x, y;
+        for (Direction direction : Direction.values()) {
+            x = block.x + direction.deltaX;
+            y = block.y + direction.deltaY;
+            if (inRange(x, y) && block.getBlockData().shape.canBuild(direction))
+                markAsBuldable(x, y);
+        }
     }
 
     private boolean inRange(int x, int y) {
