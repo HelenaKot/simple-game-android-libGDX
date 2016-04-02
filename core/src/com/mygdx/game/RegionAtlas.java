@@ -32,11 +32,6 @@ public class RegionAtlas {
         System.out.println("RegioAtlas - contains " + instance.size() + " blocks");
     }
 
-    /* todo not sure if needed
-    static public BlockData get(BlockShape shape, int var) {
-        return instance.get((BlockShape.values.indexOf(shape) - 2) * variability + var);
-    } */
-
     static private BlockData putToAtlas(BlockData blockData) {
         instance.put(blockData.id, blockData);
         return blockData;
