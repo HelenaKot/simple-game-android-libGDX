@@ -20,10 +20,6 @@ public class GameMap {
         }
     }
 
-    BlockData getBlockData(int x, int y) {
-        return map[x][y].getBlockData();
-    }
-
     void changeBlock(Block block) {
         map[block.x][block.y].remove();
         initBlock(block);

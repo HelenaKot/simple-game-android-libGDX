@@ -18,7 +18,7 @@ public class MapManager {
         Block block = BlockFactory.createBlock(gameMap.map.length / 2, 0,
                 RegionAtlas.instance.get(2 + random.nextInt(RegionAtlas.instance.size() - 2)), specificColor);
         gameMap.changeBlock(block);
-        blockPlacedUpdateBuildingGrid(block);
+        updateBuildingGrid(block);
 
         instance = this;
     }
@@ -27,7 +27,7 @@ public class MapManager {
         if (inRange(x, y)) {
             Block block = CreateFittingBlock(x, y);
             gameMap.changeBlock(block);
-            blockPlacedUpdateBuildingGrid(block);
+            updateBuildingGrid(block);
         }
     }
 
@@ -49,21 +49,26 @@ public class MapManager {
         System.out.println("considered shape is " + shape.name);
         for (Direction direction : Direction.values()) {
             if (inRange(x + direction.deltaX, y + direction.deltaY)
-                    && gameMap.map[x + direction.deltaX][y + direction.deltaY].getBlockData().shape.canConnect(shape, direction)) {
+                    && getBlockShape(x + direction.deltaX, y + direction.deltaY).canConnect(shape, direction)) {
                 return true;
             }
         }
         return false;
     }
 
-    private void blockPlacedUpdateBuildingGrid(Block block) {
+    private void updateBuildingGrid(Block block) {
         int x, y;
         for (Direction direction : Direction.values()) {
             x = block.x + direction.deltaX;
             y = block.y + direction.deltaY;
             if (inRange(x, y) && block.getBlockData().shape.canBuild(direction))
-                markAsBuldable(x, y);
+                markAsBuildable(x, y);
         }
+    }
+
+    private void markAsBuildable(int x, int y) {
+        if (getBlockShape(x, y) == LOCKED)
+            gameMap.changeBlock(com.mygdx.game.actors.BlockFactory.createBuildableBlock(x, y));
     }
 
     private boolean inRange(int x, int y) {
@@ -73,8 +78,7 @@ public class MapManager {
         return false;
     }
 
-    private void markAsBuldable(int x, int y) {
-        if (gameMap.getBlockData(x, y).shape == LOCKED)
-            gameMap.changeBlock(com.mygdx.game.actors.BlockFactory.createBuildableBlock(x, y));
+    private BlockShape getBlockShape(int x, int y) {
+        return gameMap.map[x][y].getBlockData().shape;
     }
 }
