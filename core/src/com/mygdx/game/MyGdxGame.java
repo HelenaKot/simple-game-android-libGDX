@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.actors.GameScoreManager;
 
 public class MyGdxGame extends ApplicationAdapter {
     private TextureAtlas textureAtlas;
@@ -26,6 +27,7 @@ public class MyGdxGame extends ApplicationAdapter {
         new RegionAtlas(textureAtlas);
         Constant.setUpBlockConstants((int) stage.getWidth(), RegionAtlas.getTextureSize());
         MapManager mapManager = new MapManager(stage.getWidth());
+        GameScoreManager gameScoreManager = new GameScoreManager((OrthographicCamera) stage.getCamera());
     }
 
     public static void addToStage(Actor actor) {
@@ -38,13 +40,10 @@ public class MyGdxGame extends ApplicationAdapter {
         stage.getViewport().update(width, height, true);
     }
 
-    float heightDelta = 1; //todo speed reguation
-
     @Override
     public void render() {
         Gdx.gl.glClearColor(0.3f, 0.72f, 0.7f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        ((OrthographicCamera) stage.getCamera()).translate(0, heightDelta);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

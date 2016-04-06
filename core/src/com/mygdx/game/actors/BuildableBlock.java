@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.BlockData;
 import com.mygdx.game.MapManager;
+import com.mygdx.game.Score;
 
 public class BuildableBlock extends Block {
 
@@ -13,6 +14,7 @@ public class BuildableBlock extends Block {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 MapManager.instance.placeBlock(blockX, blockY);
+                GameScoreManager.instance.addScorePoints(Score.ADDED_PLAIN_BLOCK);
                 return true;
             }
         });
