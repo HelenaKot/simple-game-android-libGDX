@@ -26,7 +26,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private void setUpGame() {
         new RegionAtlas(textureAtlas);
         Constant.setUpBlockConstants((int) stage.getWidth(), RegionAtlas.getTextureSize());
-        MapManager mapManager = new MapManager(stage.getWidth(), stage.getHeight());
+        MapManager mapManager = new MapManager(stage.getWidth());
     }
 
     public static void addToStage(Actor actor) {

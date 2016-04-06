@@ -12,8 +12,8 @@ public class MapManager {
     public static MapManager instance;
     GameMap gameMap;
 
-    MapManager(float width, float height) {
-        gameMap = new GameMap(width, height);
+    MapManager(float width) {
+        gameMap = new GameMap((int) width / Constant.BLOCK_SIZE, 1000, 0);
 
         Block block = BlockFactory.createBlock(gameMap.map.length / 2, 0,
                 RegionAtlas.instance.get(2 + new Random().nextInt(RegionAtlas.instance.size() - 2)), Color.SKY);
