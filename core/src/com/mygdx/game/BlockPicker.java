@@ -18,7 +18,6 @@ public class BlockPicker {
             blockData = RegionAtlas.instance.get(2 + random.nextInt(RegionAtlas.instance.size() - 3));
         }
         return BlockFactory.createBlock(x, y, blockData, specificColor);
-        //new Color(random.nextFloat(), random.nextFloat(), random.nextFloat(), 1)
     }
 
     static private boolean blockFits(int x, int y, BlockShape shape, MapManager mapManager) {

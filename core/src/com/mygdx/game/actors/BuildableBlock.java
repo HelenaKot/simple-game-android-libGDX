@@ -5,9 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.mygdx.game.BlockData;
 import com.mygdx.game.MapManager;
-import com.mygdx.game.RegionAtlas;
-
-import java.util.Random;
 
 public class BuildableBlock extends Block {
 

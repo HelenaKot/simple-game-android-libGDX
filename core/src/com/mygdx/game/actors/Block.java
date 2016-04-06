@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.BlockData;
 import com.mygdx.game.Constant;
-import com.mygdx.game.RegionAtlas;
 
 public class Block extends Actor {
     public int x, y;

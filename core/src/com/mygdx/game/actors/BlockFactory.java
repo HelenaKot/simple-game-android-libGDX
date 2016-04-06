@@ -1,7 +1,9 @@
 package com.mygdx.game.actors;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.*;
+import com.mygdx.game.BlockData;
+import com.mygdx.game.BlockShape;
+import com.mygdx.game.RegionAtlas;
 
 public class BlockFactory {
     private static BlockData
@@ -17,7 +19,7 @@ public class BlockFactory {
     }
 
     public static Block createBlock(int x, int y, BlockData blockData, Color tint) {
-        if (blockData.shape == com.mygdx.game.BlockShape.BUILDABLE) {
+        if (blockData.shape == BlockShape.BUILDABLE) {
             return new BuildableBlock(x, y, blockData, tint);
         } else
             return new Block(x, y, blockData, tint);
