@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.BlockData;
+import com.mygdx.game.Constant;
 import com.mygdx.game.RegionAtlas;
 
 public class Block extends Actor {
@@ -16,7 +17,7 @@ public class Block extends Actor {
         this.y = y;
         this.blockData = blockData;
         this.tint = tint;
-        setBounds(getX(), getY(), RegionAtlas.blockSize, RegionAtlas.blockSize);
+        setBounds(getX(), getY(), Constant.BLOCK_SIZE, Constant.BLOCK_SIZE);
     }
 
     public void draw(Batch batch, float alpha) {

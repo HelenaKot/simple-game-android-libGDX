@@ -10,7 +10,6 @@ import static com.mygdx.game.BlockShape.values;
 
 public class RegionAtlas {
     public static TreeMap<Integer, BlockData> instance;
-    public static int blockSize;
     static int variability = 5;
 
     RegionAtlas(TextureAtlas atlasRegion) {
@@ -27,13 +26,18 @@ public class RegionAtlas {
                     System.out.println(regionName + " is an Incorrect regionName");
             }
         }
-
-        blockSize = instance.get(10).atlasRegion.getRegionWidth();
-        System.out.println("RegioAtlas - contains " + instance.size() + " blocks");
+        System.out.println("RegionAtlas - contains " + instance.size() + " blocks");
     }
 
     static private BlockData putToAtlas(BlockData blockData) {
         instance.put(blockData.id, blockData);
         return blockData;
+    }
+
+    static public int getTextureSize() {
+        if (instance == null) {
+            System.out.println("RegionAtlas is not set up yet. Returned Texture Size is 0.");
+            return 0;
+        } else return instance.get(0).atlasRegion.getRegionWidth();
     }
 }
