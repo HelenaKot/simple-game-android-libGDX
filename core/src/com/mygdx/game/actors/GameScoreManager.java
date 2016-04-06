@@ -37,9 +37,16 @@ public class GameScoreManager extends Actor {
             speed += SPEED_STEP;
     }
 
+    public void reset() {
+        score = Score.START.value;
+        speed = 0;
+        Block.TOP_BLOCK = 0;
+    }
+
     private boolean dead() {
         if (camera.position.y / Constant.BLOCK_SIZE > Block.TOP_BLOCK + initCameraPosition)
             return true;
         return false;
     }
+
 }
