@@ -33,6 +33,9 @@ public class MyGdxGame extends ApplicationAdapter {
     public static void addToStage(Actor actor) {
         stage.addActor(actor);
     }
+    public static void die() {
+        //todo
+    }
 
     @Override
     public void resize(int width, int height) {

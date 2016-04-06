@@ -31,7 +31,6 @@ public class BlockShape {
     }
 
     public boolean canConnect(BlockShape shape, Direction direction) {
-        System.out.println("connecting " + direction + "with " + direction.flip());
         return this.canBuild(direction.flip()) && shape.canBuild(direction);
     }
 }

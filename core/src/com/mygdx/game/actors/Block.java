@@ -7,6 +7,7 @@ import com.mygdx.game.BlockData;
 import com.mygdx.game.Constant;
 
 public class Block extends Actor {
+    static public int TOP_BLOCK = 0;
     public int x, y;
     BlockData blockData;
     Color tint;

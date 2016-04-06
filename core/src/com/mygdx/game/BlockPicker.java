@@ -21,7 +21,6 @@ public class BlockPicker {
     }
 
     static private boolean blockFits(int x, int y, BlockShape shape, MapManager mapManager) {
-        System.out.println("considered shape is " + shape.name);
         for (Direction direction : Direction.values()) {
             if (mapManager.inRange(x + direction.deltaX, y + direction.deltaY)
                     && mapManager.getBlockShape(x + direction.deltaX, y + direction.deltaY).canConnect(shape, direction)) {
