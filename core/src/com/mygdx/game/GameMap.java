@@ -4,12 +4,14 @@ import com.mygdx.game.actors.Block;
 import com.mygdx.game.actors.BlockFactory;
 
 public class GameMap {
-    int heightOffset;
+    int widthPadding, heightOffset;
     Block[][] map;
 
     GameMap(float width, float height, int heightOffset) {
         this.heightOffset = heightOffset;
+        widthPadding = Constant.MAP_PADDING;
         if (map == null)
+            //initEmptyMap((int) width / Constant.BLOCK_SIZE, Constant.BLOCK_SIZE);
             initEmptyMap((int) width / Constant.BLOCK_SIZE, (int) height / Constant.BLOCK_SIZE);
     }
 
@@ -30,7 +32,7 @@ public class GameMap {
 
     private void initBlock(Block block) {
         map[block.x][block.y] = block;
-        map[block.x][block.y].setPosition(block.x * Constant.BLOCK_SIZE, (block.y + heightOffset) * Constant.BLOCK_SIZE);
+        map[block.x][block.y].setPosition(block.x *Constant.BLOCK_SIZE + widthPadding, (block.y + heightOffset) * Constant.BLOCK_SIZE);
         MyGdxGame.addToStage(block);
     }
 }
